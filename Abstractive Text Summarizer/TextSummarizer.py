@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Dec  8 13:26:40 2020
-
-@author: ACER
-"""
 import pandas as pd
 import numpy as np
 import tensorflow as tf
@@ -110,11 +104,6 @@ for epoch in range(EPOCHS):
   
     for (batch, (inp, tar)) in enumerate(dataset):
         train_step(inp, tar)
-    
-        # 55k samples
-        # we display 3 batch results -- 0th, middle and last one (approx)
-        # 55k / 64 ~ 858; 858 / 2 = 429
-        #if batch % 429 == 0:
         print ('Epoch {} Batch {} Loss {:.4f}'.format(epoch + 1, batch, train_loss.result()))
       
     if (epoch + 1) % 5 == 0:
@@ -158,10 +147,9 @@ def evaluate(input_document):
     return tf.squeeze(output, axis=0), attention_weights
     
 def summarize(input_document):
-    # not considering attention weights for now, can be used to plot attention heatmaps in the future
     summarized = evaluate(input_document=input_document)[0].numpy()
-    summarized = np.expand_dims(summarized[1:], 0)  # not printing <go> token
-    return summary_tokenizer.sequences_to_texts(summarized)[0]  # since there is just one translated document
+    summarized = np.expand_dims(summarized[1:], 0)  
+    return summary_tokenizer.sequences_to_texts(summarized)[0]
 
 summarize(
     "US-based private equity firm General Atlantic is in talks to invest about \
