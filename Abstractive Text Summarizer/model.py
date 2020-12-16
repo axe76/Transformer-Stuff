@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Dec  9 02:49:29 2020
-
-@author: ACER
-"""
 import pandas as pd
 import numpy as np
 import tensorflow as tf
